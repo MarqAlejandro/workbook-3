@@ -3,7 +3,7 @@ package com.plurasight;
 public class FamousQuote {
 
 
-    private String[] listOfQuotes = {"I think, therefore I am",
+    private String[] listOfQuotes = {"I think, therefore I am",                             //String Array to hold all the string quotes
             "The only thing we have to fear is fear itself",
             "Knowledge is power",
             "Not all those who wander is lost",
@@ -15,7 +15,7 @@ public class FamousQuote {
             "All the world's a stage, and all the men and women merely players"
     };
 
-    public String getQuotes(int pageNumber) {
+    public String getQuotes(int pageNumber) {                                       //requires int as argument, getter for quotes in the String Arrray
         return listOfQuotes[pageNumber];
     }
 
