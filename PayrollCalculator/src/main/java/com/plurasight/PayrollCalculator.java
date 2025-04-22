@@ -1,3 +1,16 @@
+/*
+finish the rest of section 2-1 exercise 1
+
+Enter the name of the payroll file to create: payroll-sept-2023.csv
+When your program finishes running, open the new file in Notepad to view the
+results.
+BONUS:  If the user chooses specifies a .json extension write the data as JSON
+instead of csv.
+
+this part from the workbook
+ */
+
+
 package com.plurasight;
 
 import java.io.BufferedReader;
@@ -10,16 +23,19 @@ import java.util.regex.Pattern;
 
 public class PayrollCalculator {
     private List<Employee> employeeList = new ArrayList<>();                                    //ArrayList for Employee objects
+    private String fileInput = "";
+    private String writeTo = "";
 
-    public void loadAndPrint(){                                                                 //main control method
+    public void findLoadAndPrint(){                                                                 //main control method
+        fileInputSelection();                                                                       //only works if in this order
         readFileLoadEmployees();
         printEmployeeInfo();
     }
 
     public void fileInputSelection(){
         Scanner scanner = new Scanner(System.in);
-
-
+        System.out.println("Enter the name of the file employee file to process: ");
+        fileInput = scanner.nextLine();
     }
 
 
@@ -28,7 +44,7 @@ public class PayrollCalculator {
             // create a FileReader object connected to the File
             System.out.println("Loading Employees' Information");
             // create a BufferedReader to manage input stream
-            BufferedReader bufReader = new BufferedReader(new FileReader("employees.csv"));     //BufferedReader variable that takes a FileReader as arguement that takes a .csv file arguement
+            BufferedReader bufReader = new BufferedReader(new FileReader(fileInput));     //BufferedReader variable that takes a FileReader as arguement that takes a .csv file arguement
             String employeeFileInput;                                                                   //String Variable to hold employee info
             // read until there is no more data
             while ((employeeFileInput = bufReader.readLine()) != null) {                                //in the midst of while loop read a line from .csv file and load it onto String Variable and check if it comes out null
@@ -46,7 +62,7 @@ public class PayrollCalculator {
             // close the stream and release the resources
             bufReader.close();                                                                          //bufferedReader close
         } catch (IOException e) {                                                                       //in case of an error with I/O
-            System.out.println();                                                                       //skip it
+            System.out.println("error. no file exists. coming from: readFileLoadEmployees method");                                                                       //skip it
         }
     }
 

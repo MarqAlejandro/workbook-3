@@ -9,7 +9,7 @@ public class Main {
 
         PayrollCalculator prCalculator = new PayrollCalculator();   //PayRollCalculator object instantiated
 
-        prCalculator.loadAndPrint();                                //call main method of PayRollCalculator
+        prCalculator.findLoadAndPrint();                                //call main method of PayRollCalculator
 
 
     }
