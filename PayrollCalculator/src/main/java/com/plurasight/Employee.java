@@ -14,6 +14,13 @@ public class Employee {
         this.payRate = payRate;
     }
 
+    public Employee(){
+        this.employeeID = 0;
+        this.name = "Default Name";
+        this.hoursWorked = 0;
+        this.payRate = 0;
+    }
+
     public double getGrossPay(){                                                        //setters and getters
         return (hoursWorked * payRate);
     }
