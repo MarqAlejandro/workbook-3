@@ -63,50 +63,55 @@ public class PayrollCalculator {
         }
     }
 
-    public void fileWriteTo(){
-        try {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Enter the name of the file to write to: ");
-            writeTo = scanner.nextLine();
+    public void fileWriteTo(){                                                                  //method to write employee contents onto a new file
+        boolean exitWhileLoop = false;
+        while(!exitWhileLoop) {
+            try {
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("Enter the name of the file to write to: ");
+                writeTo = scanner.nextLine();
 
 
-            if(writeTo.contains(".csv")) {
+                if (writeTo.contains(".csv")) {                                                 //only triggers if the input has a .csv in it
 
-                FileWriter writer = new FileWriter(writeTo);
+                    FileWriter writer = new FileWriter(writeTo);                                //create writer object
 
-
-                writer.write("Employee Payroll Information:\n");
-                for (Employee employee : employeeList) {                                                           //for-each loop to iterate through
-                    writer.write("ID: " + employee.getEmployeeID() + " |\tName: " + employee.getName() + " |\n Gross Pay: " + employee.getGrossPay() + "\n");
-                }
-
-
-                writer.close();
-            }
-            else if(writeTo.contains(".json")){
-
-                FileWriter writer = new FileWriter(writeTo);
-
-
-                writer.write("[\n");
-
-                for (Employee employee : employeeList) {                                                           //for-each loop to iterate through
-                    writer.write("   {\"ID\": " + employee.getEmployeeID() + ", \"Name\" : \"" + employee.getName() + "\", \"Gross Pay\" : " + employee.getGrossPay());
-                    if(employee.getEmployeeID() != employeeList.get(employeeList.size()-1).getEmployeeID()){
-                        writer.write("},\n");
+                    writer.write("Employee Payroll Information:\n");                        //write as intro
+                    for (Employee employee : employeeList) {                                                           //for-each loop to iterate through
+                        writer.write("ID: " + employee.getEmployeeID() + " |\tName: " + employee.getName() + " |\n Gross Pay: " + employee.getGrossPay() + "\n"); //write formatted line for each employee
                     }
-                    else{
-                        writer.write("}\n");
-                    }
-                }
-                writer.write("]");
 
-                writer.close();
+                    writer.close();                                                             //close writer
+                    exitWhileLoop = true;                                                       //end while loop and application
+                }
+                else if (writeTo.contains(".json")) {                                           //only triggers ifthe input has a .json in it
+
+                    FileWriter writer = new FileWriter(writeTo);                                //similar to .csv
+
+
+                    writer.write("[\n");                                                    //starting bracket for .json file
+
+                    for (Employee employee : employeeList) {                                                           //for-each loop to iterate through
+                        writer.write("   {\"ID\": " + employee.getEmployeeID() + ", \"Name\" : \"" + employee.getName() + "\", \"Gross Pay\" : " + employee.getGrossPay()); //write according to .json file format
+
+                        if (employee.getEmployeeID() != employeeList.get(employeeList.size() - 1).getEmployeeID()) {    //triggers if not the last employee in the list
+                            writer.write("},\n");
+                        } else {                                                                                        // else triggers if we have hit the end of the list
+                            writer.write("}\n");
+                        }
+                    }
+                    writer.write("]");                                                      //closing bracket for .json file
+
+                    writer.close();                                                             //close writer
+                    exitWhileLoop = true;                                                       //end while loop and application
+                }
+                else{
+                    System.out.println("Currently only working with .csv or .json files, don't forget to add that extension");  //in case the user puts a .txt file or some other extension
+                }
+            } catch (IOException e) {
+                System.out.println("Currently only working with .csv or .json files, don't forget to add that extension. please try again"); //incase the user doesn't add an extension
+                fileWriteTo();                                                                                                               //recursively loop back to start
             }
-        }
-        catch (IOException e) {
-            System.out.println("ERROR:  An unexpected error occurred");
-            e.printStackTrace();
         }
 
     }
