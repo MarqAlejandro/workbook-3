@@ -117,7 +117,7 @@ public class Inventory {
         while(!exitWhileLoop){
             try {
                 System.out.println("Loading Product Information");
-                BufferedReader bufReader = new BufferedReader(new FileReader("products.csv"));     //BufferedReader variable that takes a FileReader as arguement that takes a .csv file arguement
+                BufferedReader bufReader = new BufferedReader(new FileReader("Inventory.csv"));     //BufferedReader variable that takes a FileReader as arguement that takes a .csv file arguement
                 String productFileInput;                                                                   //String Variable to hold product info
 
                // bufReader.readLine();      //commented out because current file doesn't have garbage     //skip the first line, assumes that the first line is headers and garbage data
