@@ -8,6 +8,6 @@ public class Main {
         SearchEngineLogger logger = new SearchEngineLogger();
 
         logger.writeToLog();
-        
+
     }
 }
