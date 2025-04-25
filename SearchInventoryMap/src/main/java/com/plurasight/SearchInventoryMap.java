@@ -1,6 +1,6 @@
 package com.plurasight;
 
-import java.io.BufferedReader;
+import java.io.BufferedReader;                                                          //imports used in this application
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
@@ -9,58 +9,49 @@ import java.util.regex.Pattern;
 
 public class SearchInventoryMap {
 
+    private HashMap<String, Product> inventory = new HashMap<String, Product>();       //Hashmap using String as Key and Product object as value, initialized
+    private Scanner scanner = new Scanner(System.in);                                   //Scanner object initialized
 
-    private HashMap<String, Product> inventory = new HashMap<String, Product>();
-    private Scanner scanner = new Scanner(System.in);
-
-    public void mainControlMethod(){
+    public void mainControlMethod(){                                                    //main control method, calls other methods
         loadInventory();
         System.out.println("loading inventory");
         displayInventory();
         displayAnItem();
-
-
     }
 
-
-    public void displayAnItem(){
-        boolean productFound = false;
-        System.out.print("Enter a product ID: ");
-        String productName = scanner.nextLine();
+    public void displayAnItem(){                                                       //method prompts user for product name, if key equals user input display the products info
+        boolean productFound = false;                                                  // boolean initially false will change if the product is found
+        System.out.print("Enter a product name: ");
+        String productName = scanner.nextLine();                                        //prompts the user for product name and stores it into a string
         try{
-            for (String key: inventory.keySet()) {
-                if(inventory.get(key).getName().equalsIgnoreCase(productName)) {
-                    productFound = true;
+            for (String key: inventory.keySet()) {                                      //for-each loop to iterate through the hashmap keys
+                if(inventory.get(key).getName().equalsIgnoreCase(productName)) {        //only triggers if the name (ignoring case) is equal to the user's input
+                    productFound = true;                                                //boolean switch to indicate that the product is found
                     System.out.println("Product Found: ");
-                    inventory.get(key).displayInfo();
+                    inventory.get(key).displayInfo();                                   //display method to show the product's info
 
                 }
             }
             if(!productFound){
                 System.out.println("product not found");                        //if productFound remains false then it will prompt the user that it is not in the inventory
             }
-            System.out.println("Would you like to search for another product?");
+            System.out.println("Would you like to search for another product? (yes/no)");    //prompts the user if they want to search for another item
             String userInput = scanner.nextLine();
-            if(userInput.equalsIgnoreCase("yes")){
-                displayAnItem();
+            if(userInput.equalsIgnoreCase("yes")){                      //if user input (ignoring case) is yes...
+                displayAnItem();                                                    //then recurse back to the top of the method and do it again
             }
-            else if(userInput.equalsIgnoreCase("no")){
-                System.out.println("No has been detected. Have a nice day.");
+            else if(userInput.equalsIgnoreCase("no")){                  //if no then the program will fall off and terminate
+                System.out.println("No has been detected. Thank you for using our services. Have a nice day.");  //don't forget to thank the customer for using our services
             }
             else{
-                System.out.println("input was neither yes or no. defaulting to exiting the program. Have a nice day.");
+                System.out.println("input was neither yes or no. defaulting to exiting the program. Have a nice day."); //other response incase other response was inputted
             }
-
-
         }
         catch (NumberFormatException e){
-            System.out.println("input was not a number try again");
+            System.out.println("input was");
             displayAnItem();                                              //recursion to the top of the method if there was an error with the input
         }
-
-
     }
-
 
     public void displayInventory() {                                               //displays the whole inventory with a formatted text
         System.out.println("We carry the following inventory: ");
@@ -69,8 +60,6 @@ public class SearchInventoryMap {
             inventory.get(key).displayInfo();
         }
     }
-
-
 
     public void loadInventory(){
         try {
@@ -91,18 +80,12 @@ public class SearchInventoryMap {
                 else{
                     System.out.println("error: missing or too much information on a given product");
                 }
-
-                inventory.put(tokens[1].toLowerCase(), product);                                                         //load the Product object onto the Hashmap with product name as key
+                inventory.put(tokens[1].toLowerCase(), product);                            //load the Product object onto the Hashmap with product name as key
             }
             bufReader.close();                                                                          //bufferedReader close
 
         } catch (IOException e) {                                                                       //in case of an error with I/O
             System.out.println("error. no file exists.");                              //catch to loop back to beginning
         }
-
-
-
-
     }
-    
 }

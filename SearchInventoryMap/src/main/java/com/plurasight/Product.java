@@ -15,9 +15,9 @@ public class Product {
             this.name = "default";
             this.price = 0;
         }
-        public void displayInfo(){
-            System.out.printf(" %s - Price: $%.2f \n",
-                    getName(), getPrice());
+        public void displayInfo(){                                              //method to display product info
+            System.out.printf(" %s - Price: $%.2f\t- Product ID: %d \n",
+                    getName(), getPrice(), getId());
         }
         public int getId() {                                                    //list of getters and setters for each class variable
             return this.id;
