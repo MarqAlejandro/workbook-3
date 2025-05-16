@@ -18,13 +18,14 @@ public class FormatDate {
     private String formatTime;
 
     public void displayDifferentFormats(){                                                          //main control method calls other methods in order
-        FormatTodayDateAsMM_dd_yyyy();
-        FormatTodayDateAsISO_8601();
-        FormatTodayDateAsMonth_dd_yyyy();
-        FormatTodayDateTimeAsE_MMM_dd_yyyy_HHmm_in_GMT();
+       // FormatTodayDateAsMM_dd_yyyy();
+       // FormatTodayDateAsISO_8601();
+       // FormatTodayDateAsMonth_dd_yyyy();
+       // FormatTodayDateTimeAsE_MMM_dd_yyyy_HHmm_in_GMT();
 
-        System.out.println("\nChallenge");
-        FormatTodayDateTimeAsHHmm_on_dd_MMM_yyyy();
+       // System.out.println("\nChallenge");
+       // FormatTodayDateTimeAsHHmm_on_dd_MMM_yyyy();
+        System.out.println(TODAYDATETIME);
     }
 
     public void FormatTodayDateAsMM_dd_yyyy(){                                                      //displays date as sample: 01/01/2025
